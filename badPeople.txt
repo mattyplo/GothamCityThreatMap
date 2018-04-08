@@ -1,0 +1,7 @@
+Joker:5:30
+Two-Face:3:20
+Catwoman:3:20
+Harley Quinn:2:20
+Poison Ivy:2:10
+Bane:1:20
+Penguin:4:10

@@ -1,0 +1,4 @@
+Batman:5:-50
+Robin:4:-40
+Jim Gordon:3:-20
+Alfred Pennyworth:2:-10
