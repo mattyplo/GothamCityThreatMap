@@ -23,8 +23,6 @@ public class BatMain {
 		assignPersonsToMap(map, people);
         addPedestrians(map);
 
-        printPeopleLocations();
-
         // display threat map (terminal)
         System.out.printf("\nThreat Level Heat Map: \n\n");
         map.printThreats();

@@ -6,16 +6,6 @@ import java.util.Random;
 
 public class UI extends Frame {
 
-    /*
-    private static int w_width = 800;
-    private static int w_height = 600;
-
-    public UI(int width, int height) {
-        w_width = width;
-        w_height = height;
-    }
-    */
-
     private static boolean gChecked = true;
     private static boolean bChecked = true;
     private static boolean pChecked = true;
@@ -31,7 +21,7 @@ public class UI extends Frame {
 
         // Window
         JFrame window = new JFrame(title);
-        // window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(w_width, w_height);
         window.setLocation(x_origin, y_origin);
 
@@ -45,7 +35,7 @@ public class UI extends Frame {
         Random rand = new Random(System.currentTimeMillis());
 
         // Generate main
-        JFrame main = genWindow(700, 600, "Batman");
+        JFrame main = genWindow(700, 527, "Batman");
         main.setBackground(Color.white);
 
         // Content panel
@@ -61,6 +51,12 @@ public class UI extends Frame {
         title.setFont(new Font("Helvetica", Font.PLAIN, 30));
         content.add(title);
 
+        // display text area
+        JTextArea output = new JTextArea("Welcome");
+        output.setBounds(450, 250, 225, 230);
+        output.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+        content.add(output);
+        
         // Create Table 
         final int SIZE = 20;
         ArrayList<JButton> locations = new ArrayList<JButton>();
@@ -74,16 +70,22 @@ public class UI extends Frame {
                 loc.setBorder(BorderFactory.createLineBorder(Color.black, 1));
                 loc.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        System.out.printf("Button %d, %d\n", x, y);
+                        output.setText("");
+                        output.append("Location " + (x+1) + ", " + (y+1) + "\n");
+                        // System.out.printf("Button %d, %d\n", x, y);
                         ArrayList<String> names = map.getLocPeople(x, y);
-                        System.out.printf("Threat Level: %d\n", map.getLocThreat(x, y));
+                        // System.out.printf("Threat Level: %d\n", map.getLocThreat(x, y));
+                        output.append("Threat Level: " + map.getLocThreat(x, y) + "\n");
                         if(names.size() == 0) {
-                            System.out.println("No people at this location");
+                            // System.out.println("No people at this location");
+                            output.append("No people at this location");
                         } else {
-                            System.out.printf("Names:\n");
+                            // System.out.printf("Names:\n");
+                            output.append("People:\n");
                             for(int i = 0; i < names.size(); i++) {
                                 String name = names.get(i);
-                                System.out.printf("%s\n", name);
+                                // System.out.printf("%s\n", name);
+                                output.append(name + "\n");
                             }
                         }
                     }
@@ -95,7 +97,7 @@ public class UI extends Frame {
 
         // Create update button
         JButton updater = new JButton("Update");
-        updater.setBounds(520, 80, 100, 40);
+        updater.setBounds(450, 85, 100, 40);
         updater.setOpaque(true);
         updater.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         updater.setFont(new Font("Helvetica", Font.PLAIN, 20));
@@ -152,18 +154,9 @@ public class UI extends Frame {
                 filterMap(people, map, locations);
             }
         });
-        
+
         // show main
         main.setVisible(true);
-
-        // test update grid
-        /*
-        try {
-            updateGrid(locations, map, main);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        */
 
     }
 
@@ -235,27 +228,7 @@ public class UI extends Frame {
             }
             main.setVisible(true);
             Thread.sleep(1000);
-            /*
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new InterruptedException("whatevs");
-                e.printStackTrace();
-            }
-            */
         }
-    }
-
-    public static void genPopUp() {
-
-        // Generate pop up
-        JFrame main = genWindow(500, 100, "pop up");
-
-
-
-        // show main
-        main.setVisible(true);
-
     }
 
 }
